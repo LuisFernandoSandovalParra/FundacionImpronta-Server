@@ -7,11 +7,4 @@ const sequelize = new Sequelize('fundacion_impronta', 'root', 'a123', {
     dialect: 'mariadb',
 })
 
-sequelize.authenticate().then(() => {
-    console.log('Conectado')
-    })
-    .catch(err => {
-        console.log('No se conecto')
-    })
-
 module.exports = sequelize;

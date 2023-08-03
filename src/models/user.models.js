@@ -1,9 +1,11 @@
 'use strict'
 const { DataTypes } = require('sequelize')
 const sequelize = require('../../config/config');
+const Project = require('./project.models')
+const Transaction = require('./transaction.models')
 
 const User = sequelize.define("user", {
-    id: {
+    user_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -43,14 +45,16 @@ const User = sequelize.define("user", {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
-    updatedAt:  {
+    updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
 });
 
+User.belongsToMany(Project, { through: Transaction, as: 'users_projects', foreignKey: 'user_id', otherKey: 'project_id' });
+
 (async () => {
     await sequelize.sync();
 })();
 
-module.exports = User
+module.exports = User;

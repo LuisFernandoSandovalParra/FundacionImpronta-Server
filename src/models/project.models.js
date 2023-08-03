@@ -4,11 +4,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/config');
 
 const Project = sequelize.define("project", {
-    id: {
+    project_id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
+        allowNull: false
     },
     name: {
         type: DataTypes.STRING(50),
@@ -33,7 +33,7 @@ const Project = sequelize.define("project", {
     },
     problematic: {
         type: DataTypes.STRING(90),
-        allowNull:false
+        allowNull: false
     },
     proposed: {
         type: DataTypes.TEXT,
@@ -67,14 +67,10 @@ const Project = sequelize.define("project", {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
-    updatedAt:  {
+    updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
 });
-
-(async () => {
-    await sequelize.sync();
-})();
 
 module.exports = Project;

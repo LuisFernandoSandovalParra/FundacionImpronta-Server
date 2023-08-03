@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/config');
 
 const Transaction = sequelize.define('transaction', {
-    id: {
+    transaction_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -40,9 +40,5 @@ const Transaction = sequelize.define('transaction', {
         defaultValue: "CREATED"
     }
 });
-
-(async () => {
-    await sequelize.sync();
-})();
 
 module.exports = Transaction;
