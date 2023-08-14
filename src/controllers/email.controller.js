@@ -1,7 +1,6 @@
 'use strict'
 
 const nodemailer = require('nodemailer');
-const fs = require('fs')
 require('dotenv').config();
 
 const sendEmail = async (req, res) => {
@@ -32,17 +31,18 @@ const sendEmail = async (req, res) => {
     })
 }
 
+const transporterVolunteerEmail = nodemailer.createTransport({
+    host: process.env.HOST_NODEMAILER,
+    port: process.env.PORT_NODEMAILER,
+    service: process.env.SERVICE_NODEMAILER,
+    auth: {
+        user: process.env.AUTH_USER_NODEMAILER,
+        pass: process.env.AUTH_PASS_NODEMAILER
+    }
+});
+
 const sendVolunteerEmail = async (req, res) => {
     const { first_name, last_name, email, phone, academic_level, habilities, work_hours, modality, interest_population } = req.body;
-    const transporter = nodemailer.createTransport({
-        host: process.env.HOST_NODEMAILER,
-        port: process.env.PORT_NODEMAILER,
-        service: process.env.SERVICE_NODEMAILER,
-        auth: {
-            user: process.env.AUTH_USER_NODEMAILER,
-            pass: process.env.AUTH_PASS_NODEMAILER
-        }
-    });
 
     const message = `DATOS POSIBLE VOLUNTARIO: \n
     1. Nombre: ${first_name} \n 
@@ -62,7 +62,7 @@ const sendVolunteerEmail = async (req, res) => {
         text: message,
     }
 
-    await transporter.sendMail(mailOptions, (err, info) => {
+    await transporterVolunteerEmail.sendMail(mailOptions, (err, info) => {
         if (err) {
             res.status(500).json({ ok: false, message: "Falló el envio del correo." })
         } else {
