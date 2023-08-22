@@ -10,7 +10,7 @@ const Project = sequelize.define("project", {
         autoIncrement: true,
         allowNull: false
     },
-    name: {
+    title: {
         type: DataTypes.STRING(50),
         allowNull: false,
         unique: true
@@ -23,44 +23,38 @@ const Project = sequelize.define("project", {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    topic: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    place_of_application: {
-        type: DataTypes.STRING(90),
-        allowNull: false
-    },
     problematic: {
         type: DataTypes.STRING(90),
         allowNull: false
     },
-    proposed: {
+    proposal: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    population: {
-        type: DataTypes.STRING(90),
+    url_image: {
+        type: DataTypes.STRING(200),
         allowNull: false
     },
-    representative: {
-        type: DataTypes.STRING(90),
+    url_video:{
+        type: DataTypes.STRING(200),
         allowNull: false
     },
-    background: {
-        type: DataTypes.TEXT,
-        allowNull: false
+    project_type:{
+        type: DataTypes.ENUM("extension", "social"),
+        allowNull: false,
+        defaultValue: "extension"
     },
-    necessary_budget: {
+    state:{
+        type: DataTypes.ENUM("active", "unactive"),
+        allowNull: false,
+        defaultValue: "active"
+    },
+    expected_budget: {
         type: DataTypes.BIGINT,
         allowNull: false
     },
     current_budget: {
         type: DataTypes.BIGINT,
-        allowNull: false
-    },
-    url_image: {
-        type: DataTypes.STRING(200),
         allowNull: false
     },
     createdAt: {

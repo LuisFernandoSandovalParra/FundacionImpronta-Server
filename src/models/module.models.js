@@ -3,29 +3,24 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/config');
 
-const Transaction = sequelize.define('transaction', {
-    transaction_id: {
+const Module = sequelize.define('module', {
+    module_id:{
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false
     },
-    payment_reference: {
-        type: DataTypes.STRING,
+    name: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
-    payment_date: {
-        type: DataTypes.DATE,
+    url_infographic: {
+        type: DataTypes.STRING(200),
         allowNull: false
     },
-    amount: {
-        type: DataTypes.BIGINT,
+    url_pdf: {
+        type: DataTypes.STRING(200),
         allowNull: false
-    },
-    payment_status: {
-        type: DataTypes.ENUM("APPROVED", "DECLINED", "VOIDED", "ERROR", "CREATED"),
-        allowNull: false,
-        defaultValue: "CREATED"
     },
     createdAt: {
         type: DataTypes.DATE,
@@ -35,6 +30,6 @@ const Transaction = sequelize.define('transaction', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
-});
+})
 
-module.exports = Transaction;
+module.exports = Module;
