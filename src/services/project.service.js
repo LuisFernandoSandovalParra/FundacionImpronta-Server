@@ -28,8 +28,8 @@ const getProjectList = async () => {
 
 const updateProject = async (projectId, projectData) => {
     const existingProject = await projectRepository.getProjectById(projectId);
-    if (existingProject) {
-        throw new Error("El proyecto ya existe.");
+    if (!existingProject) {
+        throw new Error("El proyecto no existe.");
     }
     return await projectRepository.updateProject(projectId, projectData);
 }

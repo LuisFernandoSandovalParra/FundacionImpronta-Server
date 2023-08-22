@@ -12,7 +12,7 @@ const Module = sequelize.define('module', {
     },
     name: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
     },
     url_infographic: {
         type: DataTypes.STRING(200),

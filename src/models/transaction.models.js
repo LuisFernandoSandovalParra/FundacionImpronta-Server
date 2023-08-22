@@ -12,7 +12,8 @@ const Transaction = sequelize.define('transaction', {
     },
     payment_reference: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     payment_date: {
         type: DataTypes.DATE,

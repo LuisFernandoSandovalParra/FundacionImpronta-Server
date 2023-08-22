@@ -6,7 +6,8 @@ const sequelize = require('../../config/config');
 const Student = sequelize.define('student', {
     certificate_number: {
         type: DataTypes.STRING(200),
-        allowNull: true
+        allowNull: true,
+        unique: true
     },
     createdAt: {
         type: DataTypes.DATE,

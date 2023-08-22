@@ -13,7 +13,8 @@ const Course = sequelize.define("course", {
     },
     name: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     url_image: {
         type: DataTypes.STRING(200),
