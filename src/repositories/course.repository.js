@@ -15,11 +15,11 @@ const getCourseById = async (courseId) => {
 }
 
 const updateCourse = async (courseId, courseData) => {
-    return await Course.update(courseData, { where: { id: courseId } });
+    return await Course.update(courseData, { where: { course_id: courseId } });
 }
 
 const deleteCourse = async (courseId) => {
-    await Course.destroy({ where: { id: courseId } });
+    await Course.destroy({ where: { course_id: courseId } });
 }
 
 module.exports = {createCourse, getAllCourses, getCourseById, updateCourse, deleteCourse}

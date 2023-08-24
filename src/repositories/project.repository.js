@@ -15,11 +15,11 @@ const getProjectById = async (projectId) => {
 }
 
 const updateProject = async (projectId, projectData) => {
-    return await Project.update(projectData, { where: { id: projectId } });
+    return await Project.update(projectData, { where: { project_id: projectId } });
 }
 
 const deleteProject = async (projectId) => {
-    await Project.destroy({ where: { id: projectId } });
+    await Project.destroy({ where: { project_id: projectId } });
 }
 
 module.exports = { createProject, getAllProjects, getProjectById, updateProject, deleteProject };
