@@ -54,6 +54,7 @@ const sendVolunteerEmail = async (req, res) => {
     6. Horas de disposición: ${work_hours} \n 
     7. Modalidad: ${modality} \n 
     8. Población de interes: ${interest_population}`;
+    
 
     const mailOptions = {
         from: `Usuario interesado en voluntariados.`,

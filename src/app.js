@@ -18,6 +18,7 @@ app.get(sequelize);
         await mySequelize();
         await sequelize.sync();
     } catch (error) {
+        
         console.error('No se pudo conectar a la base de datos:', error);
     }
 })();

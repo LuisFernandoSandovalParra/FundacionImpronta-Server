@@ -51,9 +51,14 @@ const getTransactionByReference = async (req, res) => {
 
 const webHook = async(req, res) => {
     const info = req.body;
-    await transactionService.webHook()
-    console.log(info);
-    res.status(200).json({})
+
+    try {
+        await transactionService.webHook(info)
+        console.log("esta es la info: " + info);
+        res.status(200).json({})
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 module.exports = { createTransaction, modifyPaymentStatus, getTransactionById, getTransactionByReference, webHook };

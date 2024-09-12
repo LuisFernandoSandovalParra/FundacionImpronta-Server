@@ -3,9 +3,9 @@
 const transactionRepository = require('../repositories/transaction.repository')
 
 const createTransaction = async (transactionData) => {
-    const validTransaction = await transactionRepository.getTransaction(transactionData.transaction_id);
-    const existReference = await transactionRepository.getTransactionByReference(transactionData.payment_reference);
-    if (validTransaction || existReference) {
+    console.log(transactionData)
+    const validTransaction = await transactionRepository.getTransactionByReference(transactionData.transaction.reference);
+    if (validTransaction) {
         throw new Error("La transacción ya existe.");
     }
     return await transactionRepository.createTransaction(transactionData);
@@ -35,14 +35,23 @@ const updateTransaction = async (transaction_id, transactionData) => {
     return await transactionRepository.updateTransaction(transaction_id, transactionData);
 }
 
+const updateTransactionByReference = async (transactionData) => {
+    const validTransaction = await transactionRepository.getTransaction(transactionData.transaction_id);
+    if (!validTransaction) {
+        throw new Error("La transacción que intenta actualizar no existe.");
+    }
+    return await transactionRepository.updateTransactionByReference(transactionData);
+}
+
 const formatCentsToCOP = (cents) => {
     return cents / 100;
 }
 
-const webHook = async (info, transaction_id) => {
+const webHook = async (info) => {
     if (info.event === "transaction.updated") {
-        if (info.data.transaction.status === "APPROVED") {
-            const updatedTransaction = updateTransaction(transaction_id, {
+        const validTransaction = await transactionRepository.getTransactionByReference(info.data.transaction.reference);
+        if (validTransaction) {
+            const updatedTransaction = updateTransactionByReference({
                 payment_reference: info.data.transaction.reference,
                 payment_date: info.sent_at,
                 amount: formatCentsToCOP(info.data.transaction.amount_in_cents),
@@ -52,8 +61,12 @@ const webHook = async (info, transaction_id) => {
             if (updatedTransaction === 0) {
                 throw new Error("El proceso de actualización de transacción salio mal");
             }
-            console.log(info);
-            res.status(200).json({})
+            return updatedTransaction;
+        }
+        else {
+            const createdTransaction = await createTransaction(info);
+            return createdTransaction;
+
         }
     }
 }

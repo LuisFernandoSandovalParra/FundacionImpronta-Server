@@ -22,4 +22,8 @@ const updateTransaction = async (transaction_id, transactionData) => {
     return await Transaction.update(transactionData, { where: { transaction_id: transaction_id } })
 }
 
-module.exports = { createTransaction, getTransaction, updateTransaction, getTransactionByReference };
+const updateTransactionByReference = async (transactionData) => {
+    return await Transaction.update(transactionData, { where: { payment_reference: transactionData.reference} })
+}
+
+module.exports = { createTransaction, getTransaction, updateTransaction, getTransactionByReference, updateTransactionByReference };

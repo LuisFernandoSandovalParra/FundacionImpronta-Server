@@ -9,7 +9,7 @@ const Credential = sequelize.define("credential", {
         allowNull: false
     }
 })
-
+/*
 // Función para generar el hash de la contraseña antes de crear o actualizar un usuario
 Credential.beforeCreate(async (credential) => {
     const hash = await bcrypt.hash(credential.password, 20);
@@ -20,5 +20,6 @@ Credential.beforeCreate(async (credential) => {
 Credential.prototype.verifyPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
+*/
 
 module.exports = Credential;

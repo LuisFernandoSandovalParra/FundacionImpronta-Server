@@ -7,8 +7,8 @@ const WOMPI_KEY = process.env.WOMPI_PUBLIC_KEY
 const integrity = "test_integrity_dAB8V0Igt8Kpu3DPZNpNfBp5a7TpWzq9"
 
 const generatePaymentReference = () => {
-    const length = 20; // Longitud de la referencia de pago
-    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres permitidos
+    const length = 20;
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let reference = '';
     for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);

@@ -1,10 +1,7 @@
 'use strict'
+
 const { DataTypes } = require('sequelize')
 const sequelize = require('../../config/config');
-const Project = require('./project.models');
-const Donation = require('./donation.models');
-const Volunteering = require('./volunteering.models');
-const Transaction = require('./transaction.models')
 
 const User = sequelize.define("user", {
     user_id: {
@@ -59,6 +56,10 @@ const User = sequelize.define("user", {
     updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
+    },
+    rol:{
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 });
 

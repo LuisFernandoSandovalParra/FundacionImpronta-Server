@@ -26,6 +26,14 @@ const getUserList = async () => {
     return userList;
 }
 
+const getUserByEmail = async(email) => {
+    const user = await userRepository.getUserByEmail(email);
+    if(!user){
+        throw new Error("El usuario no existe");
+    }
+    return user;
+}
+
 const updateUserData = async (documentNum, userData) => {
     const existingUser = await userRepository.getUserByDocumentNum(documentNum);
     if (!existingUser) {
@@ -42,4 +50,4 @@ const deleteUserData = async (documentNum) => {
     await userRepository.deleteUser(documentNum);
 }
 
-module.exports = { createNewUser, getUser, getUserList, updateUserData, deleteUserData };
+module.exports = { createNewUser, getUser, getUserByEmail, getUserList, updateUserData, deleteUserData };
